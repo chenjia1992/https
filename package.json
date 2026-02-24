@@ -1,0 +1,18 @@
+{
+  "name": "dns01-autorenew",
+  "version": "1.0.0",
+  "description": "Node.js script for DNS-01 wildcard cert issuance, auto-renewal and nginx reload",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@alicloud/pop-core": "^1.4.0",
+    "acme-client": "^4.0.0",
+    "axios": "^1.4.0",
+    "console": "^0.7.2",
+    "dns": "^0.2.2",
+    "dotenv": "^16.1.4",
+    "node-cron": "^3.0.2"
+  }
+}
