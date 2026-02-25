@@ -301,12 +301,12 @@ function daysUntil(date) {
     return diff / (1000 * 60 * 60 * 24);
 }
 
-function readCertificate() {
+async function readCertificate() {
     try {
         const certPath = path.join(CERT_DIR, 'cert.pem');
         if (!fs.existsSync(certPath)) return null;
         const pem = fs.readFileSync(certPath, 'utf8');
-        return acme.openssl.readCertificateInfo(pem);
+        return await acme.forge.readCertificateInfo(pem);
     } catch (e) {
         console.warn('failed to read existing certificate', e.message);
         return null;
@@ -337,7 +337,7 @@ async function obtainCertificateWithRetry(maxAttempts = 3) {
 
 async function checkRenewal() {
     try {
-        const info = readCertificate();
+        const info = await readCertificate();
         if (info && info.notAfter) {
             const days = daysUntil(info.notAfter);
             console.log(`current cert expires in ${days.toFixed(1)} days`);
